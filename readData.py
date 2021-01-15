@@ -4,8 +4,7 @@ import pandas as pd
 #    print(col) 
 
 class ReadData():
-    def gfitDF():
-        fit = pd.read_csv('datasets/fit.csv')
+    def gfitDF(self):
+        fit = pd.read_csv('data/fit.csv')
         fit = pd.DataFrame(fit)
-
-print(ReadData.gfitDF())
+        return fit
