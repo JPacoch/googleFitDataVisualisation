@@ -4,8 +4,7 @@ from parseData import ParseData
 import seaborn as sns
 import matplotlib.pyplot as plt
 from datetime import datetime
-#fit = pd.read_csv('data/fit.csv')
-#fit = pd.DataFrame(fit)
+from writePlot import PlotWriter
 
 read = ReadData()
 dane = read.gfitDF()
@@ -88,6 +87,7 @@ class VisualiseData():
         ax.plot(pulsemin.iloc[:,1], linewidth = 1, label = 'Min')
         plt.xticks(timeIndexMonth, rotation = 60)
         ax.legend()
+        ax.set_title("Najwyższa, najniższa i średnia wartość tętna.")
         plt.xlim(left = 100)
         plt.show()
 
@@ -100,13 +100,26 @@ class VisualiseData():
         ax.plot(cardioPoints.iloc[:,1], linewidth = 1, label = 'Odległość')
         plt.xticks(timeIndexMonth, rotation = 60)
         ax.legend()
+        ax.set_title("Stosunek zdobytych punktów kardio do minut ruchu dziennie.")
         plt.show()
 
-a = VisualiseData()
-a.visualisePulse(pulseavg, pulsemax, pulsemin)
-#a.visualiseDistance(distance)
-#a.visualiseCalories(calories)
-#a.visualiseCardioPoints(cardio)
-#a.visualiseSteps(steps)
-#a.visualiseMinutesMoving(minutes)
-#a.visualiseMovingCardio(minutes, cardio)
+plotter = VisualiseData()
+pulsePlot = plotter.visualisePulse(pulseavg, pulsemax, pulsemin)
+distancePlot = plotter.visualiseDistance(distance)
+caloriesPlot = plotter.visualiseCalories(calories)
+cpPlot = plotter.visualiseCardioPoints(cardio)
+stepsPlot = plotter.visualiseSteps(steps)
+minutesPlot = plotter.visualiseMinutesMoving(minutes)
+cpmvPlot = plotter.visualiseMovingCardio(minutes, cardio)
+
+#lista = (pulsePlot, distancePlot)
+#print(lista)
+
+writer = PlotWriter()
+writer.writePlot(pulsePlot)
+writer.writePlot(distancePlot)
+writer.writePlot(caloriesPlot)
+writer.writePlot(cpPlot)
+writer.writePlot(stepsPlot)
+writer.writePlot(minutesPlot)
+writer.writePlot(cpmvPlot)

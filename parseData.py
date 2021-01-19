@@ -1,5 +1,4 @@
 import pandas as pd 
-#from readData import ReadData
 
 class ParseData():
     def pulseDataAvg(self, data):
