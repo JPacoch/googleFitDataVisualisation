@@ -3,7 +3,8 @@ import pandas as pd
 class ParseData():
     def pulseDataAvg(self, data):
         pulse = data[["Data","Średnie tętno (bpm)"]]
-        pulse.iloc[:,1] = pulse.iloc[:,1].fillna(0)
+        pulseMean = pulse.iloc[:,1].mean(skipna=True)
+        pulse.iloc[:,1] = pulse.iloc[:,1].fillna(pulseMean.mean())
         return pulse
     
     def caloriesData(self, data):
@@ -18,12 +19,14 @@ class ParseData():
 
     def pulseDataMax(self, data):
         pulseMax = data[["Data","Najwyższe tętno (bpm)"]]
-        pulseMax.iloc[:,1] = pulseMax.iloc[:,1].fillna(0)
+        pulseMaxMean = pulseMax.iloc[:,1].mean(skipna=True)
+        pulseMax.iloc[:,1] = pulseMax.iloc[:,1].fillna(pulseMaxMean)
         return pulseMax
 
     def pulseDataMin(self,data):
         pulseMin = data[["Data", "Najniższe tętno (bpm)"]]
-        pulseMin.iloc[:,1] = pulseMin.iloc[:,1].fillna(0)
+        pulseMinMean = pulseMin.iloc[:,1].mean(skipna=True)
+        pulseMin.iloc[:,1] = pulseMin.iloc[:,1].fillna(pulseMinMean.mean())
         return pulseMin
 
     def stepCount(self, data):
